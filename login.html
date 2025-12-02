@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión - REPARA GO!</title>
+    <style>
+        /* Mismo CSS que arriba, solo copio la parte del body para ahorrar espacio */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container { /* mismo que arriba */ 
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            max-width: 420px;
+            padding: 50px 35px;
+            text-align: center;
+            position: relative;
+        }
+        .container::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 6px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+        .logo { font-size: 38px; font-weight: 800; color: #764ba2; margin-bottom: 10px; }
+        .subtitle { color: #555; margin-bottom: 35px; font-size: 16px; }
+        /* reutilizo los mismos estilos de input y botón */
+        input { width: 100%; padding: 14px 16px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 16px; margin-bottom: 20px; transition: all 0.3s; }
+        input:focus { outline: none; border-color: #667eea; box-shadow: 0 0 0 4px rgba(102,126,234,0.15); }
+        .btn-login {
+            width: 100%; padding: 15px; background: linear-gradient(90deg, #00c9b7, #01a085);
+            color: white; border: none; border-radius: 10px; font-size: 18px; font-weight: 700;
+            cursor: pointer; transition: all 0.3s;
+        }
+        .btn-login:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,201,183,0.4); }
+        .register-link { margin-top: 25px; color: #666; }
+        .register-link a { color: #667eea; text-decoration: none; font-weight: 600; }
+        .register-link a:hover { text-decoration: underline; }
+        .functional-buttons ul li.active a {
+        color: #00c9b7 !important;
+        font-weight: bold;
+        }
+    </style>
+</head>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    document.querySelector('.functional-buttons a[href="login.html"]').parentElement.classList.add("active");
+  });
+</script>
+<body>
+    <div class="container">
+        <h1 class="logo">REPARA <span style="color: #00c9b7;">GO!</span></h1>
+        <p class="subtitle">Bienvenido de nuevo, inicia sesión para continuar</p>
+
+        <form>
+            <input type="text" placeholder="Cédula o correo electrónico" required>
+            <input type="password" placeholder="Contraseña" required>
+
+            <button type="submit" class="btn-login">
+                INICIAR SESIÓN
+            </button>
+        </form>
+
+        <div class="register-link">
+            ¿No tienes cuenta? <a href="registro.html">Regístrate aquí</a>
+        </div>
+    </div>
+<a href="index.html" class="btn-volver">
+    <i class="fas fa-arrow-left"></i> Volver al inicio
+</a>
+
+<style>
+    .btn-volver {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        background: rgba(255, 255, 255, 0.95);
+        color: #764ba2;
+        padding: 12px 20px;
+        border-radius: 50px;
+        font-weight: 600;
+        text-decoration: none;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        backdrop-filter: blur(10px);
+        z-index: 9999;
+        transition: all 0.3s ease;
+        font-size: 15px;
+    }
+    .btn-volver:hover {
+        background: #764ba2;
+        color: white;
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(118, 75, 162, 0.4);
+    }
+    .btn-volver i {
+        margin-right: 8px;
+    }
+</style>
+</body>
+</html>
