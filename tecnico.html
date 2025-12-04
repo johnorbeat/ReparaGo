@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReparaGo! - Panel Técnico</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        body {
+            margin: 0; font-family: 'Segoe UI', sans-serif; background: linear-gradient(135deg, #667eea, #764ba2);
+            min-height: 100vh; display: flex; color: #333;
+        }
+        .sidebar {
+            width: 280px; background: linear-gradient(135deg, #764ba2, #9b59b6); color: white; padding: 30px 20px;
+            box-shadow: 5px 0 15px rgba(0,0,0,0.2);
+        }
+        .sidebar h1 { margin: 0 0 40px; font-size: 28px; color: #fff; text-align: center; }
+        .menu a {
+            display: block; padding: 15px 20px; color: white; text-decoration: none;
+            border-radius: 12px; margin: 8px 0; transition: all 0.3s; font-size: 16px;
+        }
+        .menu a:hover, .menu a.active { background: rgba(255,255,255,0.2); transform: translateX(8px); }
+        .menu i { margin-right: 12px; }
+        .content {
+            flex: 1; padding: 30px; overflow-y: auto;
+        }
+        .card {
+            background: white; border-radius: 20px; padding: 30px; box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        h2 { color: #764ba2; margin-top: 0; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(420px, 1fr)); gap: 25px; }
+        .orden-card {
+            background: linear-gradient(135deg, #8e44ad, #9b59b6); color: white; padding: 25px;
+            border-radius: 20px; box-shadow: 0 15px 35px rgba(142,68,173,0.4); cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .orden-card:hover { transform: translateY(-10px); }
+        .badge { padding: 8px 16px; border-radius: 30px; font-size: 14px; font-weight: bold; }
+        .modal {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8); z-index: 999; justify-content: center; align-items: center;
+        }
+        .modal-content {
+            background: white; padding: 30px; border-radius: 20px; width: 90%; max-width: 600px;
+            max-height: 90vh; overflow-y: auto;
+        }
+        .close { float: right; font-size: 28px; cursor: pointer; color: #aaa; }
+        .close:hover { color: #000; }
+        .foto-preview { margin: 15px 0; text-align: center; }
+        .foto-preview img { max-width: 100%; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+    </style>
+</head>
+<body>
+
+    <!-- Menú lateral -->
+    <div class="sidebar">
+        <h1>REPARA GO!</h1>
+        <div class="menu">
+            <a href="#" class="active" onclick="openTab(event, 'mis-ordenes')"><i class="fas fa-tools"></i> Mis Órdenes</a>
+            <a href="#" onclick="openTab(event, 'perfil')"><i class="fas fa-user"></i> Mi Perfil</a>
+            <a href="index.html"><i class="fas fa-sign-out-alt"></i> Salir</a>
+        </div>
+        <div style="margin-top: 50px; text-align: center; opacity: 0.8; font-size: 14px;">
+            <p>Técnico: Carlos Ramírez</p>
+            <p>ID: 987654321</p>
+        </div>
+    </div>
+
+    <div class="content">
+
+        <!-- Mis Órdenes -->
+        <div id="mis-ordenes" class="tab active">
+            <div class="card">
+                <h2>Mis Órdenes de Reparación</h2>
+                <p>Aquí puedes diagnosticar, reparar y adjuntar evidencias.</p>
+
+                <div class="grid">
+                    <!-- Orden 1 -->
+                    <div class="orden-card" onclick="abrirDetalle('TOOJCO24')">
+                        <h3>Orden #TOOJCO24</h3>
+                        <p><strong>Estado:</strong> <span class="badge" style="background:#3498db">En revisión</span></p>
+                        <p><strong>Cliente:</strong> Jairo Rivera</p>
+                        <p><strong>Equipo:</strong> Laptop Acer</p>
+                        <p><strong>Problema:</strong> Daño de display</p>
+                    </div>
+
+                    <!-- Orden 2 -->
+                    <div class="orden-card" onclick="abrirDetalle('RG987654')">
+                        <h3>Orden #RG987654</h3>
+                        <p><strong>Estado:</strong> <span class="badge" style="background:#9b59b6">Reparando</span></p>
+                        <p><strong>Cliente:</strong> María González</p>
+                        <p><strong>Equipo:</strong> PC HP</p>
+                        <p><strong>Problema:</strong> No enciende</p>
+                    </div>
+
+                    <!-- Orden 3 -->
+                    <div class="orden-card" onclick="abrirDetalle('RG112233')">
+                        <h3>Orden #RG112233</h3>
+                        <p><strong>Estado:</strong> <span class="badge" style="background:#27ae60">Listo para entrega</span></p>
+                        <p><strong>Cliente:</strong> Carlos Pérez</p>
+                        <p><strong>Equipo:</strong> Samsung A52</p>
+                        <p><strong>Problema:</strong> Cambio de pantalla</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Perfil técnico -->
+        <div id="perfil" class="tab" style="display:none;">
+            <div class="card">
+                <h2>Mi Perfil</h2>
+                <p><strong>Nombre:</strong> Carlos Ramírez</p>
+                <p><strong>Cédula:</strong> 987.654.321</p>
+                <p><strong>Rol:</strong> Técnico</p>
+                <p><strong>Órdenes asignadas:</strong> 3</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de detalle y edición -->
+    <div id="modal-detalle" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="cerrarModal()">&times;</span>
+            <h2>Detalle de Orden #<span id="modal-id"></span></h2>
+            <p><strong>Cliente:</strong> <span id="modal-cliente"></span></p>
+            <p><strong>Equipo:</strong> <span id="modal-equipo"></span></p>
+            <p><strong>Problema:</strong> <span id="modal-problema"></span></p>
+
+            <div style="margin: 25px 0;">
+                <label><strong>Estado actual:</strong></label>
+                <select id="nuevo-estado" style="padding: 10px; width: 100%; border-radius: 8px; margin-top: 8px;">
+                    <option>En revisión</option>
+                    <option>Reparando</option>
+                    <option>Listo para entrega</option>
+                </select>
+            </div>
+
+            <div style="margin: 25px 0;">
+                <label><strong>Observaciones / Diagnóstico:</strong></label>
+                <textarea id="observaciones" placeholder="Escribe aquí el diagnóstico, reparación realizada, piezas cambiadas..." 
+                    style="width:100%; height:100px; padding:10px; border-radius:8px; margin-top:8px;"></textarea>
+            </div>
+
+            <div style="margin: 25px 0;">
+                <label><strong>Fotos de evidencia:</strong></label>
+                <input type="file" accept="image/*" multiple onchange="previsualizarFotos(this)">
+                <div class="foto-preview" id="preview"></div>
+            </div>
+
+            <div style="text-align: right; margin-top: 20px;">
+                <button onclick="guardarCambios()" style="background:#27ae60; color:white; padding:12px 30px; border:none; border-radius:12px; font-size:16px; cursor:pointer;">
+                    Guardar Cambios
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openTab(evt, tabName) {
+            document.querySelectorAll('.tab').forEach(t => t.style.display = 'none');
+            document.getElementById(tabName).style.display = 'block';
+            document.querySelectorAll('.menu a').forEach(a => a.classList.remove('active'));
+            evt.currentTarget.classList.add('active');
+        }
+
+        const ordenes = {
+            'TOOJCO24': {cliente: 'Jairo Rivera', equipo: 'Laptop Acer', problema: 'Daño de display'},
+            'RG987654': {cliente: 'María González', equipo: 'PC HP', problema: 'No enciende'},
+            'RG112233': {cliente: 'Carlos Pérez', equipo: 'Samsung A52', problema: 'Cambio de pantalla'}
+        };
+
+        function abrirDetalle(id) {
+            document.getElementById('modal-id').textContent = id;
+            document.getElementById('modal-cliente').textContent = ordenes[id].cliente;
+            document.getElementById('modal-equipo').textContent = ordenes[id].equipo;
+            document.getElementById('modal-problema').textContent = ordenes[id].problema;
+            document.getElementById('modal-detalle').style.display = 'flex';
+        }
+
+        function cerrarModal() {
+            document.getElementById('modal-detalle').style.display = 'none';
+            document.getElementById('preview').innerHTML = '';
+        }
+
+        function previsualizarFotos(input) {
+            const preview = document.getElementById('preview');
+            preview.innerHTML = '<p style="color:#764ba2"><em>Fotos simuladas cargadas (maqueta)</em></p>';
+            // Aquí podrías previsualizar imágenes reales si quisieras
+        }
+
+        function guardarCambios() {
+            alert('Cambios guardados correctamente (maqueta)');
+            cerrarModal();
+        }
+    </script>
+</body>
+</html>
